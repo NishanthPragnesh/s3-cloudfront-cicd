@@ -1,3 +1,15 @@
+resource "aws_s3_bucket_website_configuration" "static_site" {
+  bucket = aws_s3_bucket.static_site.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+
 # Making S3 Bucket Private
 resource "aws_s3_bucket" "static_site" {
   bucket = var.bucket_name
