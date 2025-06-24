@@ -27,7 +27,7 @@ jobs:
     - name: Invalidate CloudFront cache
       run: |
         aws cloudfront create-invalidation \
-          --distribution-id E2V09HUGD0NBXF \
+          --distribution-id E1G59IMJI3RK38 \
           --paths "/*"
 
     - name: Notify Success via SNS
@@ -42,6 +42,6 @@ jobs:
       if: failure()
       run: |
         aws sns publish \
-          --topic-arn arn:aws:sns:us-east-1:992382569792:ci-cd-deploy-status \
+          --topic-arn arn:aws:sns:us-east-1:992382569792:cicd_deployment_notification_1 \
           --message "❌ Deployment to S3 + CloudFront failed!" \
           --region us-east-1
