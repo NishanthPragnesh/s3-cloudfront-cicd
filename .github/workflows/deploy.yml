@@ -29,3 +29,19 @@ jobs:
         aws cloudfront create-invalidation \
           --distribution-id E2V09HUGD0NBXF \
           --paths "/*"
+
+    - name: Notify Success via SNS
+      if: success()
+      run: |
+        aws sns publish \
+          --topic-arn arn:aws:sns:us-east-1:992382569792:ci-cd-deploy-status \
+          --message "✅ Deployment to S3 + CloudFront succeeded!" \
+          --region us-east-1
+
+    - name: Notify Failure via SNS
+      if: failure()
+      run: |
+        aws sns publish \
+          --topic-arn arn:aws:sns:us-east-1:992382569792:ci-cd-deploy-status \
+          --message "❌ Deployment to S3 + CloudFront failed!" \
+          --region us-east-1
