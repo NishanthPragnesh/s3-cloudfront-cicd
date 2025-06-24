@@ -34,7 +34,7 @@ jobs:
       if: success()
       run: |
         aws sns publish \
-          --topic-arn arn:aws:sns:us-east-1:992382569792:ci-cd-deploy-status \
+          --topic-arn arn:aws:sns:us-east-1:992382569792:cicd_deployment_notification_1 \
           --message "✅ Deployment to S3 + CloudFront succeeded!" \
           --region us-east-1
 
