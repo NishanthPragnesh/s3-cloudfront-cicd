@@ -31,7 +31,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
         Principal = {
           AWS = aws_cloudfront_origin_access_identity.oai.iam_arn
         },
-        Action = "s3:GetObject",
+        Action   = "s3:GetObject",
         Resource = "${aws_s3_bucket.static_site.arn}/*"
       }
     ]
@@ -40,7 +40,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 # Making CloudFront Distribution
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = "${aws_s3_bucket.static_site.bucket_regional_domain_name}"
+    domain_name = aws_s3_bucket.static_site.bucket_regional_domain_name
     origin_id   = "S3Origin"
 
     s3_origin_config {
